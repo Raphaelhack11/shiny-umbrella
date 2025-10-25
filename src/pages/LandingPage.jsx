@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function LandingPage() {
+  const [pid, setPid] = useState("");
   const navigate = useNavigate();
+
+  const verify = () => {
+    if (!pid.trim()) {
+      toast.error("Please enter Personnel ID");
+      return;
+    }
+    if (pid.trim() === "11111A0sj") {
+      toast.success("Welcome, James Richard!");
+      setTimeout(() => navigate("/userinfo"), 800);
+    } else {
+      toast.error("Invalid Personnel ID");
+    }
+  };
 
   return (
     <div className="app-shell">
@@ -10,48 +25,41 @@ export default function LandingPage() {
         <div className="header">
           <div className="logo">BR</div>
           <div>
-            <h1>BlueRiver Bank</h1>
-            <p className="lead">Your trusted partner in BSC digital banking</p>
+            <h1>BlueRiver Bank — Personnel Verify</h1>
+            <p className="lead">Enter your personnel ID to continue</p>
           </div>
         </div>
 
         <div className="box">
-          <p>
-            Welcome to <strong>BlueRiver Bank</strong>, the secure and modern way
-            to manage your BNB assets. Our platform lets you check your wallet
-            balance, track transactions, and manage your digital banking
-            seamlessly.
-          </p>
-          <div className="actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate("/userinfo")}
-            >
-              Get Started
+          <div className="input-row">
+            <label>Personnel ID</label>
+            <input
+              value={pid}
+              onChange={(e) => setPid(e.target.value)}
+              placeholder="e.g. 11111A0sj"
+            />
+          </div>
+
+          <div className="row">
+            <button className="btn btn-primary" onClick={verify}>
+              Verify
             </button>
             <button
               className="btn btn-ghost"
-              onClick={() => navigate("/wallet")}
+              onClick={() => {
+                setPid("11111A0sj");
+                toast("Personnel ID inserted");
+              }}
             >
-              View Wallet
+              Fill Personnel ID
             </button>
           </div>
-        </div>
 
-        <div className="wallet-card">
-          <div>
-            <h3>Reliable, Transparent, Global</h3>
-            <p className="muted">
-              Built on Binance Smart Chain for faster, safer transactions.
-            </p>
-          </div>
-          <img
-            src="https://cryptologos.cc/logos/binance-coin-bnb-logo.svg?v=025"
-            alt="BNB"
-            style={{ width: 64, height: 64 }}
-          />
+          <p className="small-muted" style={{ marginTop: 12 }}>
+            Demo note: use <strong>11111A0sj</strong> for the class demo.
+          </p>
         </div>
       </div>
     </div>
   );
-}
+                }
