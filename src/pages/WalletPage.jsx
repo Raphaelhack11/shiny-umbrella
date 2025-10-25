@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BSCSCAN_API_KEY = "YOUR_BSCSCAN_API_KEY"; // 🔁 Replace with your own
+const BSCSCAN_API_KEY = "AB1MZYXX63MIGJWKS3PBY3WKJ3GFTQA85U"; // 🔁 Replace with your own
 
 export default function WalletPage() {
   const [balance, setBalance] = useState(null);
